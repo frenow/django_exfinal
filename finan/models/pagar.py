@@ -1,0 +1,65 @@
+from django.db import models
+from django.apps import apps
+
+class PagarDAO(models.Manager):
+    def novo(self, descricao, valor, data_venc, data_pgto, situacao):
+        p = Pagar(descricao = descricao, 
+        valor = valor, 
+        data_venc = data_venc, 
+        data_pgto = data_pgto,
+        situacao = situacao)
+
+        p.save()
+        return p
+
+
+    def editar(self, id, descricao, valor, data_venc, data_pgto, situacao):
+        p = Pagar.objects.get(id=id)
+
+        p.descricao = descricao, 
+        p.valor = valor, 
+        p.data_venc = data_venc, 
+        p.data_pgto = data_pgto,
+        p.situacao = situacao
+        
+        p.save()
+        return p
+
+class Pagar(models.Model):
+    descricao = models.CharField(max_length=200)
+    valor = models.FloatField(null=True, blank=True, default=None)
+    data_venc = models.DateField(null=True)
+    data_pgto = models.DateField(null=True)
+    situacao = models.CharField(max_length=10)
+
+    objects = PagarDAO()
+
+class Classifica_PagarDAO(models.Manager):
+    def novo(self, descricao):
+        c = Classifica_Pagar(descricao = descricao)
+
+        c.save()
+        return c
+
+
+    def editar(self, id, descricao):
+        c = Classifica_Pagar.objects.get(id=id)
+
+        c.descricao = descricao        
+        c.save()
+        return c
+
+    def excluir(self, id):
+        c = Classifica_Pagar.objects.get(id=id)
+
+        c.delete()
+
+class Classifica_Pagar(models.Model):
+    #pagar = models.ForeignKey("Pagar", on_delete=models.CASCADE)
+    descricao = models.CharField(max_length=200)
+
+    objects = Classifica_PagarDAO()
+
+class Forma_Pagar(models.Model):
+    #pagar = models.ForeignKey("Pagar", on_delete=models.CASCADE)
+    descricao = models.CharField(max_length=200)
