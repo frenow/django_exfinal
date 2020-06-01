@@ -45,3 +45,69 @@ def edit_class_pagar(request):
 def excluir_class_pagar(request, id_class):
     Classifica_Pagar.objects.excluir(id_class)
     return HttpResponse(f"{id_class} excluido com sucesso")
+
+def listar_forma_pagar(request):
+    result = Forma_Pagar.objects.all()
+    template = loader.get_template('listar_forma_pagar.html')
+    context = {
+        'lista' : result,
+    }
+    return HttpResponse(template.render(context, request))
+
+def cadastro_forma_pagar(request):
+    return render(request, 'cadastro_forma_pagar.html')
+
+def cadastrar_forma_pagar(request):
+    f = Forma_Pagar.objects.novo(request.POST['descricao'])
+    return HttpResponse(f"{f.descricao} cadastrado com sucesso")
+
+def detalhar_forma_pagar(request, id_forma):
+    f = Forma_Pagar.objects.get(id=id_forma)
+    context = {'forma':f}
+    return render(request, 'detalhe_forma_pagar.html', context)
+
+def editar_forma_pagar(request, id_forma):
+    f = Forma_Pagar.objects.get(id=id_forma)
+    context = {'forma':f}
+    return render(request, 'editar_forma_pagar.html', context)
+
+def edit_forma_pagar(request):
+    f = Forma_Pagar.objects.editar(request.POST['id'], request.POST['descricao'])
+    return HttpResponse(f"{f.descricao} alterado com sucesso")
+
+def excluir_forma_pagar(request, id_forma):
+    Forma_Pagar.objects.excluir(id_forma)
+    return HttpResponse(f"{id_forma} excluido com sucesso")
+
+def listar_pagar(request):
+    result = Pagar.objects.all()
+    template = loader.get_template('listar_pagar.html')
+    context = {
+        'lista' : result,
+    }
+    return HttpResponse(template.render(context, request))
+
+def cadastro_pagar(request):
+    return render(request, 'cadastro_pagar.html')
+
+def cadastrar_pagar(request):
+    p = Pagar.objects.novo(request.POST['descricao'], request.POST['valor'], request.POST['data_venc'], request.POST['data_pgto'], request.POST['situacao'])
+    return HttpResponse(f"{p.descricao} cadastrado com sucesso")
+
+def detalhar_pagar(request, id_pagar):
+    p = Pagar.objects.get(id=id_pagar)
+    context = {'pagar':p}
+    return render(request, 'detalhe_pagar.html', context)
+
+def editar_pagar(request, id_pagar):
+    p = Pagar.objects.get(id=id_pagar)
+    context = {'pagar':p}
+    return render(request, 'editar_pagar.html', context)
+
+def edit_pagar(request):
+    p = Pagar.objects.editar(request.POST['id'], request.POST['descricao'], request.POST['valor'], request.POST['data_venc'], request.POST['data_pgto'], request.POST['situacao'])
+    return HttpResponse(f"{p.descricao} alterado com sucesso")
+
+def excluir_pagar(request, id_pagar):
+    Pagar.objects.excluir(id_pagar)
+    return HttpResponse(f"{id_pagar} excluido com sucesso")

@@ -60,6 +60,28 @@ class Classifica_Pagar(models.Model):
 
     objects = Classifica_PagarDAO()
 
+class Forma_PagarDAO(models.Manager):
+    def novo(self, descricao):
+        f = Forma_Pagar(descricao = descricao)
+
+        f.save()
+        return f
+
+
+    def editar(self, id, descricao):
+        f = Forma_Pagar.objects.get(id=id)
+
+        f.descricao = descricao        
+        f.save()
+        return f
+
+    def excluir(self, id):
+        f = Forma_Pagar.objects.get(id=id)
+
+        f.delete()
+
 class Forma_Pagar(models.Model):
     #pagar = models.ForeignKey("Pagar", on_delete=models.CASCADE)
     descricao = models.CharField(max_length=200)
+
+    objects = Forma_PagarDAO()

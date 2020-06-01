@@ -1,0 +1,14 @@
+<html>
+<body>
+	<h1>Cadastro de Contas a Pagar</h1>
+	<form action="/finan/cadastrar_pagar/" method="post">
+		{% csrf_token %}
+		<p>Descricao: <input type="text" name="descricao" required></p>
+		<p>Valor: <input type="text" name="valor" required></p>
+		<p>Data de Vencimento: <input type="date" name="data_venc" required></p>
+		<p>Data de Pagamento: <input type="date" name="data_pgto"></p>
+		<p>Situacao: <input type="text" name="situacao" required></p>
+		<p><input type="submit" name="Enviar"></p>
+	</form>
+</body>
+</html>

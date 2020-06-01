@@ -1,0 +1,15 @@
+<html>
+<body>
+    <h1>Contas a Pagar</h1>
+	<form action="/finan/edit_pagar/" method="POST">
+		{% csrf_token %}
+		<p>Id: <input type="text" name="id" value={{pagar.id}} readonly></p>
+        <p>Descricao: <input type="text" name="descricao" value={{pagar.descricao}} required></p>
+		<p>Valor: <input type="text" name="valor" value={{pagar.valor}} required></p>
+		<p>Data de Vencimento: <input type="text" name="data_venc" value={{pagar.data_venc}} required></p>
+		<p>Data de Pagamento: <input type="text" name="data_pgto" value={{pagar.pgto}}></p>
+		<p>Situacao: <input type="text" name="situacao" value={{pagar.situacao}} required></p>
+		<p><input type="submit" name="Enviar"></p>
+	</form>
+</body>
+</html>

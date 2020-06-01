@@ -1,0 +1,23 @@
+{% load static %}
+<a href="/finan/cadastro_forma_pagar">Cadastrar Forma Pagamento de Contas a Pagar</a><br />
+{% if lista %}
+	<ul>
+	{% for forma in lista %}
+		<li>
+            <a href="{% url 'detalhar_forma_pagar' forma.id %}">{{forma.descricao}}</a>
+            
+            <a href="{% url 'editar_forma_pagar' forma.id %}">
+				<img src="{% static 'editar.png' %}" width="20" height="20">
+			</a>
+
+			<a href="{% url 'excluir_forma_pagar' forma.id %}">
+				<img src="{% static 'excluir.png' %}" width="20" height="20">
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+
+{% else %}
+	<p>Não há Forma Pagamento a pagar cadastrada</p>
+{% endif %}
+<a href="javascript:history.back()">Go Back</a>
