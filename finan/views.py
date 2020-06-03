@@ -110,11 +110,19 @@ def detalhar_pagar(request, id_pagar):
 
 def editar_pagar(request, id_pagar):
     p = Pagar.objects.get(id=id_pagar)
-    context = {'pagar':p}
+    forma = Forma_Pagar.objects.all()
+    classifica = Classifica_Pagar.objects.all()
+    situacao = ['ABERTO','BAIXADO']
+    context = {
+        'pagar':p,
+        'situacao':situacao,
+        'forma': forma,
+        'classifica': classifica,
+    }
     return render(request, 'editar_pagar.html', context)
 
 def edit_pagar(request):
-    p = Pagar.objects.editar(request.POST['id'], request.POST['descricao'], request.POST['valor'], request.POST['data_venc'], request.POST['data_pgto'], request.POST['situacao'])
+    p = Pagar.objects.editar(request.POST['id'], request.POST['descricao'], request.POST['valor'], request.POST['data_venc'], request.POST['data_pgto'], request.POST['situacao'], request.POST['c_id'], request.POST['f_id'])
     return HttpResponse(f"{p.descricao} alterado com sucesso")
 
 def excluir_pagar(request, id_pagar):

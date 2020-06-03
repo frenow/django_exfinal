@@ -3,7 +3,8 @@ from django.apps import apps
 
 class PagarDAO(models.Manager):
     def novo(self, descricao, valor, data_venc, data_pgto, situacao, c_id, f_id):
-        p = Pagar(descricao = descricao, 
+        p = Pagar(
+        descricao = descricao, 
         valor = valor, 
         data_venc = data_venc, 
         data_pgto = data_pgto,
@@ -15,23 +16,25 @@ class PagarDAO(models.Manager):
         return p
 
 
-    def editar(self, id, descricao, valor, data_venc, data_pgto, situacao):
+    def editar(self, id, descricao, valor, data_venc, data_pgto, situacao, c_id, f_id):
         p = Pagar.objects.get(id=id)
 
-        p.descricao = descricao, 
-        p.valor = valor, 
-        p.data_venc = data_venc, 
-        p.data_pgto = data_pgto,
+        p.descricao = descricao
+        p.valor = valor
+        p.data_venc = data_venc 
+        p.data_pgto = data_pgto
         p.situacao = situacao
+        p.classifica_id = c_id
+        p.forma_id = f_id
         
         p.save()
         return p
 
 class Pagar(models.Model):
     descricao = models.CharField(max_length=200)
-    valor = models.FloatField(null=True, blank=True, default=None)
-    data_venc = models.DateField(null=True)
-    data_pgto = models.DateField(null=True)
+    valor = models.DecimalField(null=True, blank=True, default=None, max_digits=5, decimal_places=2)
+    data_venc = models.DateTimeField(null=True)
+    data_pgto = models.DateTimeField(null=True)
     situacao = models.CharField(max_length=10)
     classifica = models.ForeignKey("Classifica_Pagar", blank=True, null=True, on_delete=models.CASCADE)
     forma = models.ForeignKey("Forma_Pagar", blank=True, null=True, on_delete=models.CASCADE)

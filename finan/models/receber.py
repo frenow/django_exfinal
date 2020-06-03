@@ -28,7 +28,7 @@ class ReceberDAO(models.Manager):
 
 class Receber(models.Model):
     descricao = models.CharField(max_length=200)
-    valor = models.FloatField(null=True, blank=True, default=None)
+    valor = models.DecimalField(null=True, blank=True, default=None, max_digits=5, decimal_places=2)
     data = models.DateField(null=True)
     data_rec = models.DateField(null=True)
     situacao = models.CharField(max_length=10)

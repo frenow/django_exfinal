@@ -3,12 +3,34 @@
     <h1>Contas a Pagar</h1>
 	<form action="/finan/edit_pagar/" method="POST">
 		{% csrf_token %}
-		<p>Id: <input type="text" name="id" value={{pagar.id}} readonly></p>
-        <p>Descricao: <input type="text" name="descricao" value={{pagar.descricao}} required></p>
-		<p>Valor: <input type="text" name="valor" value={{pagar.valor}} required></p>
-		<p>Data de Vencimento: <input type="text" name="data_venc" value={{pagar.data_venc}} required></p>
-		<p>Data de Pagamento: <input type="text" name="data_pgto" value={{pagar.pgto}}></p>
-		<p>Situacao: <input type="text" name="situacao" value={{pagar.situacao}} required></p>
+		<p>Id: <input type="text" name="id" value="{{pagar.id}}" readonly></p>
+        <p>Descricao: <input type="text" name="descricao" value="{{pagar.descricao}}" required></p>
+		<p>Valor: <input type="text" name="valor" value="{{pagar.valor|floatformat:2}}" required></p>
+		<p>Data de Vencimento: <input type="date" name="data_venc" value="{{pagar.data_venc|date:'Y-m-d'}}" required></p>
+		<p>Data de Pagamento: <input type="date" name="data_pgto" value="{{pagar.data_pgto|date:'Y-m-d'}}" ></p>
+		<p><label>Situacao: </label>
+			<select name='situacao'>
+				{% for s in situacao %}
+					<option value = {{ s }} {% if s == pagar.situacao %}selected="selected"{% endif %}>{{s|capfirst}}</option>
+				{% endfor %}		
+			</select>
+		</p>
+
+		<p><label>Classificacao: </label>
+			<select name='c_id'>
+				{% for c in classifica %}
+					<option value = {{ c.id }} {% if c.id == pagar.classifica_id %}selected="selected"{% endif %}>{{c.descricao|capfirst}}</option>
+				{% endfor %}		
+			</select>
+		</p>
+
+		<p><label>Forma de Pagamento: </label>
+			<select name='f_id'>
+				{% for f in forma %}
+					<option value = {{ f.id }} {% if f.id == pagar.forma_id %}selected="selected"{% endif %}>{{f.descricao|capfirst}}</option>
+				{% endfor %}		
+			</select>
+		</p>
 		<p><input type="submit" name="Enviar"></p>
 	</form>
 </body>
