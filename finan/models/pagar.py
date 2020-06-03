@@ -2,12 +2,14 @@ from django.db import models
 from django.apps import apps
 
 class PagarDAO(models.Manager):
-    def novo(self, descricao, valor, data_venc, data_pgto, situacao):
+    def novo(self, descricao, valor, data_venc, data_pgto, situacao, c_id, f_id):
         p = Pagar(descricao = descricao, 
         valor = valor, 
         data_venc = data_venc, 
         data_pgto = data_pgto,
-        situacao = situacao)
+        situacao = situacao,
+        classifica_id = c_id,
+        forma_id = f_id)
 
         p.save()
         return p
@@ -31,6 +33,8 @@ class Pagar(models.Model):
     data_venc = models.DateField(null=True)
     data_pgto = models.DateField(null=True)
     situacao = models.CharField(max_length=10)
+    classifica = models.ForeignKey("Classifica_Pagar", blank=True, null=True, on_delete=models.CASCADE)
+    forma = models.ForeignKey("Forma_Pagar", blank=True, null=True, on_delete=models.CASCADE)
 
     objects = PagarDAO()
 
@@ -55,7 +59,7 @@ class Classifica_PagarDAO(models.Manager):
         c.delete()
 
 class Classifica_Pagar(models.Model):
-    #pagar = models.ForeignKey("Pagar", on_delete=models.CASCADE)
+    
     descricao = models.CharField(max_length=200)
 
     objects = Classifica_PagarDAO()
@@ -81,7 +85,6 @@ class Forma_PagarDAO(models.Manager):
         f.delete()
 
 class Forma_Pagar(models.Model):
-    #pagar = models.ForeignKey("Pagar", on_delete=models.CASCADE)
     descricao = models.CharField(max_length=200)
 
     objects = Forma_PagarDAO()

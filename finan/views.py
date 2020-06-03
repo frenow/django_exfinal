@@ -88,10 +88,19 @@ def listar_pagar(request):
     return HttpResponse(template.render(context, request))
 
 def cadastro_pagar(request):
-    return render(request, 'cadastro_pagar.html')
+    situacao = ['ABERTO','BAIXADO']
+    forma = Forma_Pagar.objects.all()
+    classifica = Classifica_Pagar.objects.all()
+    template = loader.get_template('cadastro_pagar.html')
+    context = {
+        'forma': forma,
+        'classifica': classifica,
+        'situacao': situacao,
+    }
+    return HttpResponse(template.render(context, request))
 
 def cadastrar_pagar(request):
-    p = Pagar.objects.novo(request.POST['descricao'], request.POST['valor'], request.POST['data_venc'], request.POST['data_pgto'], request.POST['situacao'])
+    p = Pagar.objects.novo(request.POST['descricao'], request.POST['valor'], request.POST['data_venc'], request.POST['data_pgto'], request.POST['situacao'], request.POST['c_id'], request.POST['f_id'])
     return HttpResponse(f"{p.descricao} cadastrado com sucesso")
 
 def detalhar_pagar(request, id_pagar):

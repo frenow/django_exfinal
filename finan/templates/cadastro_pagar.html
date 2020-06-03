@@ -7,7 +7,31 @@
 		<p>Valor: <input type="text" name="valor" required></p>
 		<p>Data de Vencimento: <input type="date" name="data_venc" required></p>
 		<p>Data de Pagamento: <input type="date" name="data_pgto"></p>
-		<p>Situacao: <input type="text" name="situacao" required></p>
+
+		<p><label>Classificacao: </label>
+			<select name='c_id'>
+				{% for c in classifica %}
+					<option value = {{ c.id }}> {{ c.descricao }} </option>
+				{% endfor %}		
+			</select>
+		</p>
+
+		<p><label>Forma de Pagamento: </label>
+			<select name='f_id'>
+				{% for f in forma %}
+					<option value = {{ f.id }}> {{ f.descricao }} </option>
+				{% endfor %}		
+			</select>
+		</p>
+
+		<p><label>Situacao: </label>
+			<select name='situacao'>
+				{% for s in situacao %}
+					<option value = {{ s }}> {{ s }} </option>
+				{% endfor %}		
+			</select>
+		</p>
+
 		<p><input type="submit" name="Enviar"></p>
 	</form>
 </body>
