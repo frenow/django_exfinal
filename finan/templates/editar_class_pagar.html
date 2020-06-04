@@ -4,7 +4,7 @@
 	<form action="/finan/edit_class_pagar/" method="POST">
 		{% csrf_token %}
 		<p>Id: <input type="text" name="id" value={{class.id}} readonly></p>
-		<p>Descricao: <input type="text" name="descricao" value={{class.descricao}} required></p>
+		<p>Descricao: <input type="text" name="descricao" value="{{class.descricao}}" required></p>
 		<p><input type="submit" name="Enviar"></p>
 	</form>
 </body>

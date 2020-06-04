@@ -3,6 +3,10 @@ from django.apps import apps
 
 class PagarDAO(models.Manager):
     def novo(self, descricao, valor, data_venc, data_pgto, situacao, c_id, f_id):
+        
+        if not data_pgto:
+            data_pgto = None
+
         p = Pagar(
         descricao = descricao, 
         valor = valor, 
@@ -19,6 +23,9 @@ class PagarDAO(models.Manager):
     def editar(self, id, descricao, valor, data_venc, data_pgto, situacao, c_id, f_id):
         p = Pagar.objects.get(id=id)
 
+        if not data_pgto:
+            data_pgto = None
+
         p.descricao = descricao
         p.valor = valor
         p.data_venc = data_venc 
@@ -29,6 +36,11 @@ class PagarDAO(models.Manager):
         
         p.save()
         return p
+    
+    def excluir(self, id):
+        p = Pagar.objects.get(id=id)
+
+        p.delete()
 
 class Pagar(models.Model):
     descricao = models.CharField(max_length=200)
