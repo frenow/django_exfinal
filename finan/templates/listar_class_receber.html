@@ -1,0 +1,23 @@
+{% load static %}
+<a href="/finan/cadastro_class_receber">Cadastrar Classificacao de Contas a Receber</a><br />
+{% if lista %}
+	<ul>
+	{% for class in lista %}
+		<li>
+            <a href="{% url 'detalhar_class_receber' class.id %}">{{class.descricao}}</a>
+            
+            <a href="{% url 'editar_class_receber' class.id %}">
+				<img src="{% static 'editar.png' %}" width="20" height="20">
+			</a>
+
+			<a href="{% url 'excluir_class_receber' class.id %}">
+				<img src="{% static 'excluir.png' %}" width="20" height="20">
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+
+{% else %}
+	<p>Não há classificacão a receber cadastrada</p>
+{% endif %}
+<a href="javascript:history.back()">Go Back</a>

@@ -1,0 +1,23 @@
+{% load static %}
+<a href="/finan/cadastro_receber">Cadastrar Contas a Receber</a><br />
+{% if lista %}
+	<ul>
+	{% for receber in lista %}
+		<li>
+            <a href="{% url 'detalhar_receber' receber.id %}">{{receber.descricao}} - {{receber.data_venc}} R$ {{receber.valor}}</a>
+            
+            <a href="{% url 'editar_receber' receber.id %}">
+				<img src="{% static 'editar.png' %}" width="20" height="20">
+			</a>
+
+			<a href="{% url 'excluir_receber' receber.id %}">
+				<img src="{% static 'excluir.png' %}" width="20" height="20">
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+
+{% else %}
+	<p>Não há Contas a Receber cadastrada</p>
+{% endif %}
+<a href="javascript:history.back()">Go Back</a>

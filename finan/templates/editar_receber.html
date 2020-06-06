@@ -1,0 +1,37 @@
+<html>
+<body>
+    <h1>Contas a Receber</h1>
+	<form action="/finan/edit_receber/" method="POST">
+		{% csrf_token %}
+		<p>Id: <input type="text" name="id" value="{{receber.id}}" readonly></p>
+        <p>Descricao: <input type="text" name="descricao" value="{{receber.descricao}}" required></p>
+		<p>Valor: <input type="text" name="valor" value="{{receber.valor|floatformat:2}}" required></p>
+		<p>Data de Vencimento: <input type="date" name="data_venc" value="{{receber.data_venc|date:'Y-m-d'}}" required></p>
+		<p>Data de Pagamento: <input type="date" name="data_rec" value="{{receber.data_rec|date:'Y-m-d'}}" ></p>
+		<p><label>Situacao: </label>
+			<select name='situacao'>
+				{% for s in situacao %}
+					<option value = {{ s }} {% if s == receber.situacao %}selected="selected"{% endif %}>{{s|capfirst}}</option>
+				{% endfor %}		
+			</select>
+		</p>
+
+		<p><label>Classificacao: </label>
+			<select name='c_id'>
+				{% for c in classifica %}
+					<option value = {{ c.id }} {% if c.id == receber.classifica_id %}selected="selected"{% endif %}>{{c.descricao|capfirst}}</option>
+				{% endfor %}		
+			</select>
+		</p>
+
+		<p><label>Forma de Pagamento: </label>
+			<select name='f_id'>
+				{% for f in forma %}
+					<option value = {{ f.id }} {% if f.id == preceberagar.forma_id %}selected="selected"{% endif %}>{{f.descricao|capfirst}}</option>
+				{% endfor %}		
+			</select>
+		</p>
+		<p><input type="submit" name="Enviar"></p>
+	</form>
+</body>
+</html>

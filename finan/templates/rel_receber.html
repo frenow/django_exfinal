@@ -1,0 +1,26 @@
+{% load static %}
+<h1>RELATORIO DE CONTAS A RECEBER</h1>
+{% if rel %}
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>Descricao</th>
+        <th>Data de Vencimento</th>
+        <th>Data de Recebimento</th>
+        <th>Situacao</th>
+    </tr>
+    {% for r in rel %}
+    <tr>
+        <td>{{r.id}}</td>
+        <td>{{r.descricao}}</td>
+        <td>{{r.data_venc}}</td>
+        <td>{{r.data_rec}}</td>
+        <td>{{r.situacao}}</td>
+    </tr>
+	{% endfor %}
+	</table>
+
+{% else %}
+	<p>Não há dados para exibir.</p>
+{% endif %}
+<a href="javascript:history.back()">Go Back</a>

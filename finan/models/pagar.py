@@ -41,6 +41,10 @@ class PagarDAO(models.Manager):
         p = Pagar.objects.get(id=id)
 
         p.delete()
+    
+    def rel(self, data_ini, data_fin):
+        p = Pagar.objects.filter(data_venc__range = [data_ini, data_fin])
+        return p
 
 class Pagar(models.Model):
     descricao = models.CharField(max_length=200)

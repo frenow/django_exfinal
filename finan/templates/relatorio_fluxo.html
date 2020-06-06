@@ -1,0 +1,23 @@
+<html>
+<body>
+    <h1>Relatorio de Fluxo de Caixa</h1>
+	<form action="/finan/rel_fluxo/" method="POST">
+		{% csrf_token %}
+		<p>Data de inicial vencimento: <input type="date" name="data_ini"  required></p>
+        <p>Data de final vencimento: <input type="date" name="data_fin" required ></p>  
+        <p><label>Situacao: </label>
+            <select name='situacao'>
+                {% for s in situacao %}
+                    <option value = {{ s }}>{{s|capfirst}}</option>
+                {% endfor %}		
+            </select>
+        </p>
+		<p><input type="submit" name="Imprimir"></p>
+	</form>
+</body>
+</html>
+
+
+
+
+

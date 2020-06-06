@@ -1,0 +1,10 @@
+<html>
+<body>
+	<h1>Cadastro de Classificacao Contas a Receber</h1>
+	<form action="/finan/cadastrar_class_receber/" method="post">
+		{% csrf_token %}
+		<p>Descricao: <input type="text" name="descricao" required></p>
+		<p><input type="submit" name="Enviar"></p>
+	</form>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<html>
+<body>
+    <h1>Relatorio de Contas a Receber</h1>
+	<form action="/finan/rel_receber/" method="POST">
+		{% csrf_token %}
+		<p>Data de inicial vencimento: <input type="date" name="data_ini"  required></p>
+        <p>Data de final vencimento: <input type="date" name="data_fin" required ></p>  
+
+		<p><input type="submit" name="Imprimir"></p>
+	</form>
+</body>
+</html>
